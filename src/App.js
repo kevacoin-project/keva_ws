@@ -121,7 +121,9 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div>
-          <input className="ns-input" type="text" placeholder="Namespace ID, e.g. Nfw2WYkGoSKve74cCfEum67x8bFgpHygxg" style={{marginRight: 10}} onChange={onChange}/>
+          <p style={{fontSize: 16, color: "#4169e1", fontWeight: "700"}}>Under active development, check back often!</p>
+          <p style={{fontSize: 14}}>Enter Namespace ID, e.g. Nfw2WYkGoSKve74cCfEum67x8bFgpHygxg</p>
+          <input className="ns-input" type="text" placeholder="Namespace ID" style={{marginRight: 10}} onChange={onChange}/>
           <button className="ns-button" onClick={onSubmit}>Go</button>
         </div>
         { listComp }
