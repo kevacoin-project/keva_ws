@@ -122,6 +122,7 @@ function App() {
       <header className="App-header">
         <div>
           <p style={{fontSize: 18, color: "#4169e1", fontWeight: "700"}}>Under Active Development</p>
+          <p style={{fontSize: 14, fontWeight: 700}}>Serverless Keva Blockchain Viewer</p>
           <p style={{fontSize: 14}}>Enter Namespace ID, e.g. Nfw2WYkGoSKve74cCfEum67x8bFgpHygxg</p>
           <input className="ns-input" type="text" placeholder="Namespace ID" style={{marginRight: 10}} onChange={onChange}/>
           <button className="ns-button" onClick={onSubmit}>Go</button>
