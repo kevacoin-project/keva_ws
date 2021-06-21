@@ -73,9 +73,8 @@ function App() {
 
   const namespaceInfo = (
     <div className="ns-info">
-      <p className="ns-info-name">{info.displayName}</p>
-      <p className="ns-info-id">{'Namespace ID: ' + info.namespaceId}</p>
-      <p className="ns-info-code">{'Short Code: ' + info.shortCode}</p>
+      <p className="ns-info-name">{info.displayName + ' @' + info.shortCode}</p>
+      {/* <p className="ns-info-id">{'Namespace ID: ' + info.namespaceId}</p> */}
     </div>
   );
 
