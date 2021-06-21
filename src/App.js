@@ -14,6 +14,50 @@ function timeConverter(UNIX_timestamp) {
   return timeStr;
 }
 
+const mediaReg = /\{\{([0-9a-zA-Z]+)\|(.+)\}\}/;
+const DefaultIPFSGateway = 'https://ipfs.io/ipfs/';
+const IPFSGateway = DefaultIPFSGateway;
+
+// Check if the key contains media, e.g.
+// {{QmfPwecQ6hgtNRD1S8NtYQfMKYwBRWJcrteazKJTBejifB|image/jpeg}}
+function extractMedia(value) {
+  let mediaMatches = mediaReg.exec(value);
+  if (mediaMatches && mediaMatches.length >= 3) {
+    let mediaCID = mediaMatches[1];
+    let mimeType = mediaMatches[2];
+    return {mediaCID, mimeType};
+  }
+  return {};
+}
+
+export function getImageGatewayURL(CID) {
+  return `${IPFSGateway}/${CID}`
+}
+
+export function replaceMedia(value, CIDHeight, CIDWidth, poster) {
+    let mediaMatches = mediaReg.exec(value);
+    if (mediaMatches && mediaMatches.length >= 3) {
+      let mediaStr = mediaMatches[0];
+      let mediaCID = mediaMatches[1];
+      let mimeType = mediaMatches[2];
+      const mediaURL = getImageGatewayURL(mediaCID);
+      if (mimeType.startsWith('image')) {
+        const img = `<br/><img src="${mediaURL}" height="${CIDHeight}" width="${CIDWidth}" />`
+        //return value.replace(mediaStr, img);
+        return (
+          <>
+            <p className="ns-value">{value.replace(mediaStr, '')}</p>
+            <img src={mediaURL} width={CIDWidth} style={{marginTop: 20}}/>
+          </>
+        );
+      } else if (mimeType.startsWith('video')) {
+        const video = `<br/><video height="${CIDHeight}" width="${CIDWidth}" poster="${poster}"><source src="${mediaURL}" type="${mimeType}"></video>`
+        return value.replace(mediaStr, video);
+      }
+    }
+    return value;
+}
+
 function App() {
 
   const kws = useRef(null);
@@ -62,6 +106,17 @@ function App() {
   }
 
   const listComp = list.map((e, index) => {
+    let value = e.value;
+    const media = extractMedia(value);
+    if (media.mediaCID) {
+      return (
+        <div className="ns-key-value" key={index}>
+          <p className="ns-key">{e.key}</p>
+          <p className="ns-time">{timeConverter(e.time)}</p>
+          {replaceMedia(value, 400, 400)}
+        </div>
+      );
+    }
     return (
       <div className="ns-key-value" key={index}>
         <p className="ns-key">{e.key}</p>
