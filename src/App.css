@@ -57,11 +57,12 @@ body {
   margin-top: 20px;
   margin-bottom: 20px;
   margin-right: 20px;
-  padding: 10px 10px;
+  padding: 10px 10px 20px 10px;
 }
 
 .ns-key {
   font-weight: 700;
+  line-height: 0.5;
 }
 
 .ns-value {
@@ -73,4 +74,29 @@ body {
   font-size: 13px;
   color: #aaa;
   line-height: 0px;
+}
+
+.ns-info {
+  width: 96%;
+  border-radius: 5px;
+  border-width: 1px;
+  background-color: #17a2b8;
+  color: #fff;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  padding: 0px 10px;
+}
+
+.ns-info-name {
+  font-weight: 700;
+  line-height: 0.5;
+}
+
+.ns-info-code {
+  line-height: 0.5;
+}
+
+.ns-info-id {
+  line-height: 0.5;
 }
